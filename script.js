@@ -10,15 +10,17 @@ async function showall() {
   );
   const resGet = await response.json();
 
+  resGet.sort((a, b) => a.id - b.id);
+
   let list = `<h2>All Test</h2>`;
   resGet.forEach((element, index) => {
     list += `<li>${index + 1} - ${element.testVar}
-            <span><button onclick=updateTest(${element.id},"${
+            <span><button onclick="updateTest(${element.id},'${
       element.testVar
-    }")>Update</button></span>
-            <span><button onclick=deleteTest(${
+    }')">Update</button></span>
+            <span><button onclick="deleteTest(${
               element.id
-            })>Delete</button></span></li>`;
+            })">Delete</button></span></li>`;
   });
 
   allContainer.innerHTML = list;
