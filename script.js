@@ -2,7 +2,7 @@ let allContainer = document.getElementById("allContainer");
 let addText = document.getElementById("addText");
 
 // BASE LINK (only change this)
-let baseURL = "http://localhost:8080";
+let baseURL = "https://testcrudbackend-production.up.railway.app";
 
 window.onload = showall;
 
