@@ -1,13 +1,14 @@
 let allContainer = document.getElementById("allContainer");
 let addText = document.getElementById("addText");
 
+// BASE LINK (only change this)
+let baseURL = "http://localhost:8080";
+
 window.onload = showall;
 
 //GET
 async function showall() {
-  const response = await fetch(
-    "https://testcrudbackend-production.up.railway.app/all"
-  );
+  const response = await fetch(`${baseURL}/all`);
   const resGet = await response.json();
 
   resGet.sort((a, b) => a.id - b.id);
@@ -30,14 +31,9 @@ async function showall() {
 async function addTest() {
   let addTextValue = addText.value;
 
-  await fetch(
-    `https://testcrudbackend-production.up.railway.app/post?testVar=${encodeURIComponent(
-      addTextValue
-    )}`,
-    {
-      method: "POST",
-    }
-  );
+  await fetch(`${baseURL}/post?testVar=${encodeURIComponent(addTextValue)}`, {
+    method: "POST",
+  });
 
   addText.value = "";
   showall();
@@ -48,9 +44,7 @@ async function updateTest(id, testVar) {
   let updateValue = prompt("Enter the new value", testVar);
 
   await fetch(
-    `https://testcrudbackend-production.up.railway.app/update/${id}?testVar=${encodeURIComponent(
-      updateValue
-    )}`,
+    `${baseURL}/update/${id}?testVar=${encodeURIComponent(updateValue)}`,
     {
       method: "PUT",
     }
@@ -61,19 +55,16 @@ async function updateTest(id, testVar) {
 
 //DELETE
 async function deleteTest(id) {
-  await fetch(
-    `https://testcrudbackend-production.up.railway.app/delete/${id}`,
-    {
-      method: "DELETE",
-    }
-  );
+  await fetch(`${baseURL}/delete/${id}`, {
+    method: "DELETE",
+  });
 
   showall();
 }
 
 //CLEAR
 async function clearTest(params) {
-  await fetch(`https://testcrudbackend-production.up.railway.app/clear`, {
+  await fetch(`${baseURL}/clear`, {
     method: "DELETE",
   });
 
